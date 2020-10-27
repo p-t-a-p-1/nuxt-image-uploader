@@ -1,14 +1,12 @@
 <template>
-  <div>
-    <Upload />
-  </div>
+  <UploadForm />
 </template>
 
 <script>
-import Upload from '@/components/templates/upload.vue'
+import UploadForm from '@/components/templates/uploadForm.vue'
 export default {
   components: {
-    Upload,
+    UploadForm,
   },
 }
 </script>

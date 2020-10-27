@@ -1,3 +1,6 @@
+const Sass = require('sass')
+const Fiber = require('fibers')
+
 export default {
   /*
    ** Nuxt rendering mode
@@ -55,7 +58,13 @@ export default {
     '@nuxtjs/bulma',
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
+    'nuxt-webfontloader',
   ],
+  webfontloader: {
+    google: {
+      famiies: ['Poppins:400,500,700']
+    }
+  },
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
@@ -66,12 +75,13 @@ export default {
    ** See https://nuxtjs.org/api/configuration-build/
    */
   build: {
-    postcss: {
-      preset: {
-        features: {
-          customProperties: false,
-        },
-      },
+    loaders: {
+      scss: {
+        implementation: Sass,
+        sassOptions: {
+          fiber: Fiber
+        }
+      }
     },
   },
 }
