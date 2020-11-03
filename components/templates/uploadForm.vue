@@ -15,8 +15,21 @@
         </label>
       </div>
     </div>
+    <pre>{{ fileList }}</pre>
   </div>
 </template>
+
+<script>
+import { auth, storage, db } from '@/plugins/firebase'
+
+export default {
+  data() {
+    return {
+      fileList: '',
+    }
+  },
+}
+</script>
 
 <style lang="scss" scoped>
 .uploadForm {
