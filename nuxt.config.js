@@ -1,6 +1,6 @@
 const Sass = require('sass')
 const Fiber = require('fibers')
-
+require('dotenv').config()
 export default {
   /*
    ** Nuxt rendering mode
@@ -60,6 +60,7 @@ export default {
     '@nuxtjs/bulma',
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
+    '@nuxtjs/dotenv',
     'nuxt-webfontloader',
   ],
   webfontloader: {
