@@ -11,7 +11,7 @@
       <div class="uploadForm_main_button">
         <label class="-label">
           Choose a file
-          <input type="file" />
+          <input type="file" @change="uploaded" />
         </label>
       </div>
     </div>
@@ -25,6 +25,12 @@ export default {
     return {
       fileList: '',
     }
+  },
+  methods: {
+    uploaded(photo) {
+      const photoFile = photo.target.files[0]
+      console.log(photoFile)
+    },
   },
 }
 </script>
