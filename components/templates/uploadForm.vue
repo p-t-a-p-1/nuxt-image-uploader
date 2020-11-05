@@ -19,7 +19,7 @@
 </template>
 
 <script>
-// import firebase from '@/plugins/firebase'
+import firebase from '@/plugins/firebase'
 export default {
   data() {
     return {
@@ -28,8 +28,13 @@ export default {
   },
   methods: {
     uploaded(photo) {
+      // 選択されたファイルを取得
       const photoFile = photo.target.files[0]
-      console.log(photoFile)
+      // 保存先のパス・ファイル名を指定
+      const storageRef = firebase.storage().ref('images/' + photoFile.name)
+      storageRef.put(photoFile).then(() => {
+        console.log(photoFile.name + 'が保存されました')
+      })
     },
   },
 }
