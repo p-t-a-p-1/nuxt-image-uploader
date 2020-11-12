@@ -3,7 +3,12 @@
     <h1 class="uploadForm_title">Upload your image</h1>
     <p class="uploadForm_note">File should be Jpeg, Png,...</p>
     <div class="uploadForm_main">
-      <figure class="uploadForm_main_drop">
+      <figure
+        class="uploadForm_main_drop"
+        :class="{ '-active': isDrag }"
+        @dragenter="dragEnter"
+        @dragleave="dragLeave"
+      >
         <img src="@/assets/img/image.svg" width="" height="" />
         <p class="-text">Drag & Drop your image here</p>
       </figure>
@@ -23,7 +28,7 @@ import firebase from '@/plugins/firebase'
 export default {
   data() {
     return {
-      fileList: '',
+      isDrag: false,
     }
   },
   methods: {
@@ -35,6 +40,14 @@ export default {
       storageRef.put(photoFile).then(() => {
         console.log(photoFile.name + 'が保存されました')
       })
+    },
+    dragEnter() {
+      console.log('now drag...')
+      this.isDrag = true
+    },
+    dragLeave() {
+      console.log('drag leave!')
+      this.isDrag = false
     },
   },
 }
@@ -81,6 +94,9 @@ export default {
       box-sizing: border-box;
       border-radius: 12px;
       text-align: center;
+      &.-active {
+        border: 3px solid #97bef4;
+      }
       .-text {
         padding-top: 37px;
         font-size: 1.2rem;
