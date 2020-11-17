@@ -8,6 +8,8 @@
         :class="{ '-active': isDrag }"
         @dragenter="dragEnter"
         @dragleave="dragLeave"
+        @dragover.prevent
+        @drop.prevent="dropFile"
       >
         <img src="@/assets/img/image.svg" width="" height="" />
         <p class="-text">Drag & Drop your image here</p>
@@ -35,11 +37,7 @@ export default {
     uploaded(photo) {
       // 選択されたファイルを取得
       const photoFile = photo.target.files[0]
-      // 保存先のパス・ファイル名を指定
-      const storageRef = firebase.storage().ref('images/' + photoFile.name)
-      storageRef.put(photoFile).then(() => {
-        console.log(photoFile.name + 'が保存されました')
-      })
+      this.uploadFirebase(photoFile)
     },
     dragEnter() {
       console.log('now drag...')
@@ -48,6 +46,17 @@ export default {
     dragLeave() {
       console.log('drag leave!')
       this.isDrag = false
+    },
+    dropFile() {
+      // TODO ファイル取得
+      this.isDrag = false
+      console.log(event.dataTransfer.files)
+    },
+    uploadFirebase(file) {
+      const storageRef = firebase.storage().ref('images/' + file.name)
+      storageRef.put(file).then(() => {
+        console.log(file.name + 'が保存されました')
+      })
     },
   },
 }
