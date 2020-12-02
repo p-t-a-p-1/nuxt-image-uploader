@@ -50,12 +50,18 @@ export default {
     dropFile() {
       // TODO ファイル取得
       this.isDrag = false
-      console.log(event.dataTransfer.files)
+      const photoFile = event.dataTransfer.files[0]
+      this.uploadFirebase(photoFile)
     },
     uploadFirebase(file) {
       const storageRef = firebase.storage().ref('images/' + file.name)
+      // firebaseに画像アップロード
       storageRef.put(file).then(() => {
         console.log(file.name + 'が保存されました')
+        // アップロードした画像のURLを表示
+        storageRef.getDownloadURL().then((url) => {
+          console.log(url)
+        })
       })
     },
   },
