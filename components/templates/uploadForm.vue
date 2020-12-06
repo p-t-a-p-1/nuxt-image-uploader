@@ -24,12 +24,23 @@
         </div>
       </div>
     </div>
-    <!-- アップロードアニメーション -->
-    <!-- アップロード後 -->
+    <!-- フォーム -->
     <div class="upload_loading">
       <p class="upload_loading_text">Uploading...</p>
       <div class="upload_loading_bar"><span class="-active"></span></div>
     </div>
+    <!-- ローディングアニメーション -->
+    <div class="upload_finish">
+      <p class="upload_finish_text">Uploaded Successfully!</p>
+      <figure class="upload_finish_img">
+        <img src="@/assets/img/finish.jpeg" width="" height="" />
+      </figure>
+      <div class="upload_finish_urlWrap">
+        <input type="text" />
+        <button type="button" class="js-copy-button">Copy Link</button>
+      </div>
+    </div>
+    <!-- 完了画面 -->
   </div>
 </template>
 
