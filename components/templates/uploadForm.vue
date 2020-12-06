@@ -1,6 +1,6 @@
 <template>
   <div class="upload">
-    <div class="upload_form">
+    <div v-show="isForm" class="upload_form">
       <h1 class="upload_form_title">Upload your image</h1>
       <p class="upload_form_note">File should be Jpeg, Png,...</p>
       <div class="upload_form_main">
@@ -25,12 +25,12 @@
       </div>
     </div>
     <!-- フォーム -->
-    <div class="upload_loading">
+    <div v-show="isLoading" class="upload_loading">
       <p class="upload_loading_text">Uploading...</p>
       <div class="upload_loading_bar"><span class="-active"></span></div>
     </div>
     <!-- ローディングアニメーション -->
-    <div class="upload_finish">
+    <div v-show="isFinish" class="upload_finish">
       <p class="upload_finish_check"></p>
       <p class="upload_finish_text">Uploaded Successfully!</p>
       <figure class="upload_finish_img">
@@ -51,6 +51,9 @@ export default {
   data() {
     return {
       isDrag: false,
+      isForm: true,
+      isLoading: false,
+      isFinish: false,
     }
   },
   methods: {
@@ -81,6 +84,12 @@ export default {
         // アップロードした画像のURLを表示
         storageRef.getDownloadURL().then((url) => {
           console.log(url)
+          this.isForm = false
+          this.isLoading = true
+          setTimeout(() => {
+            this.isLoading = false
+            this.isFinish = true
+          }, 3000)
         })
       })
     },
