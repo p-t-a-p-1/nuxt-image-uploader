@@ -31,6 +31,7 @@
     </div>
     <!-- ローディングアニメーション -->
     <div class="upload_finish">
+      <p class="upload_finish_check"></p>
       <p class="upload_finish_text">Uploaded Successfully!</p>
       <figure class="upload_finish_img">
         <img src="@/assets/img/finish.jpeg" width="" height="" />
@@ -223,6 +224,112 @@ export default {
           timing-function: linear; // 速度 linear : 一定
           iteration-count: infinite; // 無限ループ
         }
+      }
+    }
+  }
+  &_finish {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    padding: 40px 32px 33px;
+    width: 400px;
+    height: 454px;
+    background: #fff;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    &_check {
+      margin: auto;
+      width: 35px;
+      height: 35px;
+      border-radius: 100%;
+      background: #219653;
+      position: relative;
+      &::before,
+      &::after {
+        content: '';
+        display: block;
+        position: absolute;
+        background-color: #fff;
+        border-radius: 7px;
+        height: 4px;
+      }
+      &::before {
+        width: 30%;
+        top: 55%;
+        left: 17%;
+        transform: rotate(43deg);
+      }
+      &::after {
+        width: 60%;
+        top: 47%;
+        left: 28%;
+        transform: rotate(-45deg);
+      }
+    }
+    &_text {
+      padding-top: 11px;
+      font-family: Poppins;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 18px;
+      line-height: 27px;
+      text-align: center;
+      letter-spacing: -0.035em;
+      color: #4f4f4f;
+    }
+    &_img {
+      padding-top: 25px;
+      img {
+        border-radius: 12px;
+      }
+    }
+    &_urlWrap {
+      margin-top: 25px;
+      position: relative;
+      input {
+        pointer-events: none;
+        padding-left: 7px;
+        padding-right: 80px;
+        width: 100%;
+        height: 34px;
+        background: #f6f8fb;
+        border: 1px solid #e0e0e0;
+        box-sizing: border-box;
+        border-radius: 8px;
+        font-family: Poppins;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 8px;
+        line-height: 12px;
+        letter-spacing: -0.035em;
+        color: #4f4f4f;
+      }
+      button {
+        cursor: pointer;
+        position: absolute;
+        width: 74px;
+        height: 30px;
+        top: 2px;
+        right: 2px;
+        background: #2f80ed;
+        border: none;
+        border-radius: 8px;
+        transition: 0.3s;
+        &:hover {
+          opacity: 0.7;
+        }
+        font: {
+          family: Poppins;
+          weight: 500;
+          size: 8px;
+        }
+        line-height: 12px;
+        text-align: center;
+        letter-spacing: -0.035em;
+        color: #fff;
       }
     }
   }
