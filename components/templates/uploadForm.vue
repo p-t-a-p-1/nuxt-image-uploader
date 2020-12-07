@@ -1,6 +1,6 @@
 <template>
   <div class="upload">
-    <div v-show="isForm" class="upload_form">
+    <div v-if="isForm" class="upload_form">
       <h1 class="upload_form_title">Upload your image</h1>
       <p class="upload_form_note">File should be Jpeg, Png,...</p>
       <div class="upload_form_main">
@@ -25,20 +25,20 @@
       </div>
     </div>
     <!-- フォーム -->
-    <div v-show="isLoading" class="upload_loading">
+    <div v-if="isLoading" class="upload_loading">
       <p class="upload_loading_text">Uploading...</p>
       <div class="upload_loading_bar"><span class="-active"></span></div>
     </div>
     <!-- ローディングアニメーション -->
-    <div v-show="isFinish" class="upload_finish">
+    <div v-if="isFinish" class="upload_finish">
       <p class="upload_finish_check"></p>
       <p class="upload_finish_text">Uploaded Successfully!</p>
       <figure class="upload_finish_img">
         <img src="@/assets/img/finish.jpeg" width="" height="" />
       </figure>
       <div class="upload_finish_urlWrap">
-        <input type="text" />
-        <button type="button" class="js-copy-button">Copy Link</button>
+        <input type="text" :value="downloadUrl" class="js-input-url" readonly />
+        <button type="button" @click="copyToClipboard">Copy Link</button>
       </div>
     </div>
     <!-- 完了画面 -->
@@ -54,6 +54,7 @@ export default {
       isForm: true,
       isLoading: false,
       isFinish: false,
+      downloadUrl: '',
     }
   },
   methods: {
@@ -83,15 +84,19 @@ export default {
         console.log(file.name + 'が保存されました')
         // アップロードした画像のURLを表示
         storageRef.getDownloadURL().then((url) => {
-          console.log(url)
           this.isForm = false
           this.isLoading = true
           setTimeout(() => {
             this.isLoading = false
             this.isFinish = true
-          }, 3000)
+            this.downloadUrl = url
+          }, 7000)
         })
       })
+    },
+    copyToClipboard() {
+      // nuxt-clipboard2でクリップボードにコピー
+      this.$copyText(this.downloadUrl)
     },
   },
 }
