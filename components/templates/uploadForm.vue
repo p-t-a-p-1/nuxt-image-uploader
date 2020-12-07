@@ -34,7 +34,7 @@
       <p class="upload_finish_check"></p>
       <p class="upload_finish_text">Uploaded Successfully!</p>
       <figure class="upload_finish_img">
-        <img src="@/assets/img/finish.jpeg" width="" height="" />
+        <img :src="downloadUrl" width="" height="" />
       </figure>
       <div class="upload_finish_urlWrap">
         <input type="text" :value="downloadUrl" class="js-input-url" readonly />
@@ -296,8 +296,11 @@ export default {
     }
     &_img {
       padding-top: 25px;
+      text-align: center;
       img {
         border-radius: 12px;
+        height: 180px;
+        object-fit: cover;
       }
     }
     &_urlWrap {
